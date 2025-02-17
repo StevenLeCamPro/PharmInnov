@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from "react";
+>>>>>>> nicolas
 import { Text, View } from "react-native";
 
 export default function Index() {
