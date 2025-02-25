@@ -39,6 +39,9 @@ export default function Header() {
                 <Pressable style={styles.navLink} onPress={() => toggleVisibility()}>
                     <Link href={"/"}><Text style={styles.navText}>Connexion</Text></Link>
                 </Pressable>
+                <Pressable style={styles.navLink} onPress={() => toggleVisibility()}>
+                    <Link href={"/dashboard"}><Text style={styles.navText}>Tableau de Bord</Text></Link>
+                </Pressable>
             </View>
             : null}
         </SafeAreaView>

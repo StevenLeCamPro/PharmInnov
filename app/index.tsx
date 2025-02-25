@@ -5,7 +5,7 @@ import Login from "./login";
 
 export default function Index() {
   return (
-    <SafeAreaView>
+    <SafeAreaView >
       <Header/>
       <View style={styles.content}>
 
@@ -19,7 +19,7 @@ export default function Index() {
 const styles = StyleSheet.create(
   {
     content: {
-      backgroundColor: '#f0f0f0',  // à changer
+      backgroundColor: '#E9DDBC',  // à changer
    
 
     }

@@ -44,6 +44,8 @@ export default function Login() {
 const styles = StyleSheet.create(
   {
     content: {
+      backgroundColor: '#E9DDBC',
+      height: '100%',
 
     },
     loginText: {
