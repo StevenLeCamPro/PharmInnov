@@ -23,7 +23,7 @@ export default function Dashboard() {
             </Link>
           </Pressable>
           <Pressable style={styles.button}>
-            <Link href={"/login"} style={styles.link}>
+            <Link href={"/commandes"} style={styles.link}>
               Gestion des commandes
             </Link>
           </Pressable>

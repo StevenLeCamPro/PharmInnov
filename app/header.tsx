@@ -34,7 +34,7 @@ export default function Header() {
                     <Link href={"/medicaments"}><Text style={styles.navText}>Médicaments</Text></Link>
                 </Pressable>
                 <Pressable style={styles.navLink} onPress={() => toggleVisibility()}>
-                    <Link href={"/"}><Text style={styles.navText}>Visite Virtuelle</Text></Link>
+                    <Link href={"/virtualApplication"}><Text style={styles.navText}>Visite Virtuelle</Text></Link>
                 </Pressable>
                 <Pressable style={styles.navLink} onPress={() => toggleVisibility()}>
                     <Link href={"/"}><Text style={styles.navText}>Connexion</Text></Link>

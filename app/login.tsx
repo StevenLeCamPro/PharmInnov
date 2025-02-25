@@ -9,7 +9,6 @@ export default function Login() {
       <View style={styles.content}>
 <Text style={styles.loginText}>
     Bonjour et bienvenue ! Veuillez vous connecter. 
-   
 </Text>
 
 <View style={styles.inputContainer}>
@@ -30,6 +29,11 @@ export default function Login() {
     />
     <Pressable style={styles.button}>
         <Link href={"/"} style={styles.link}>Se connecter</Link>
+    </Pressable>
+    <Pressable style={styles.button}>
+      {/* Temporaire */}
+        <Link href={"/uploadOrdonnance"} style={styles.link}>Voir la page ordonnance</Link> 
+        
     </Pressable>
 
     <Text style={styles.formText2}>
