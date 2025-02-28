@@ -3,9 +3,12 @@ import React from "react";
 import { StyleSheet, SafeAreaView, Image, Text, View, Pressable } from "react-native";
 import { TextInput, Button } from "react-native";
 
+
+
 export default function Login() {
   return (
     <SafeAreaView>
+      
       <View style={styles.content}>
 <Text style={styles.loginText}>
     Bonjour et bienvenue ! Veuillez vous connecter. 
@@ -39,7 +42,10 @@ export default function Login() {
     <Text style={styles.formText2}>
     Si vous n'avez pas de compte, veuillez consulter notre site pour vous inscrire
     </Text>
+    
 </View>
+
+
       </View>
     </SafeAreaView>
   );

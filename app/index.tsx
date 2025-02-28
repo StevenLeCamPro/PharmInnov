@@ -3,6 +3,7 @@ import { StyleSheet, SafeAreaView, Image, Text, View } from "react-native";
 import Header from "./header";
 import Login from "./login";
 
+
 export default function Index() {
   return (
     <SafeAreaView >
@@ -10,6 +11,7 @@ export default function Index() {
       <View style={styles.content}>
 
       <Login/>
+      
 
       </View>
     </SafeAreaView>
