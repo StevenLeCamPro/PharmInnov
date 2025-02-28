@@ -28,7 +28,7 @@ export default function Dashboard() {
             </Link>
           </Pressable>
           <Pressable style={styles.button}>
-            <Link href={"/login"} style={styles.link}>
+            <Link href={"/userGet"} style={styles.link}>
               Gestion des utilisateurs
             </Link>
           </Pressable>

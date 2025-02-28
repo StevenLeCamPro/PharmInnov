@@ -31,7 +31,7 @@ export default function Login() {
         secureTextEntry
     />
     <Pressable style={styles.button}>
-        <Link href={"/"} style={styles.link}>Se connecter</Link>
+        <Link href={"/home"} style={styles.link}>Se connecter</Link>
     </Pressable>
     <Pressable style={styles.button}>
       {/* Temporaire */}

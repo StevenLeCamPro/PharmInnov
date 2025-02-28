@@ -28,7 +28,7 @@ export default function Header() {
             {visibility ? 
             <View style={styles.nav}>
                 <Pressable style={styles.navLink} onPress={() => toggleVisibility()}>
-                    <Link href={"/"}><Text style={styles.navText}>Accueil</Text></Link>
+                    <Link href={"/home"}><Text style={styles.navText}>Accueil</Text></Link>
                 </Pressable>
                 <Pressable style={styles.navLink} onPress={() => toggleVisibility()}>
                     <Link href={"/medicaments"}><Text style={styles.navText}>Médicaments</Text></Link>
