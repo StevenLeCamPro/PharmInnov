@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 // const api = "http://10.0.2.2:8000"
 const api = "http://192.168.1.41:8000"
 
 
 
+=======
+const api = "http://10.0.2.2:8000"
+// const api = "http://172.24.151.81:8000"
+>>>>>>> 512c5aebc8004463ad50c43b904fd9dfe0dd1d3e
 function ApiRouter (table:string, method:string, id?:number) {
 
     if (id) {
