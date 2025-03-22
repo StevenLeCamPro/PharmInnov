@@ -3,16 +3,24 @@ import Api from "./api";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
+interface Produit {
+    id: number;
+    nom: string;
+    description: string;
+    dosage: string;
+    prix: number;
+    stock: number;
+    image: string;
+    imageId: number;
+    categorie: string[];
+}
+
 export default function Test() {
-    const [produits, setProduits] = useState([]);
+    const [produits, setProduits] = useState<Produit[]>([]);
 
     const fetchProduits = async () => {
         try {
-            const result = await Api("produit", "get", 22);
-            console.log("API Response:", result);
-
-            // Ensure `produits` is an array
-            setProduits(Array.isArray(result) ? result : result.produits || []);
+            setProduits(await Api("produit", "get", 22));
         } catch (error) {
             console.error("Error fetching products:", error);
         }
@@ -20,24 +28,29 @@ export default function Test() {
 
     useEffect(() => {
         fetchProduits();
-    }, []);  // Add empty dependency array to avoid infinite calls
+    }, []);
+
+    useEffect(() => {
+        console.log(produits);
+    }, [produits])
 
     return (
         <SafeAreaView>
-        <View>
-            {produits.map((produit, index) => (
-                <Text key={index} style={styles.caca}>{produit.nom}</Text>
-            ))}
-        </View>
+            <View>
+                {produits.length > 0 ? (
+                    produits.map((produit, index) => (
+                        <Text key={index} style={styles.caca}>{produit.nom}</Text> // ✅ No more TypeScript error
+                    ))
+                ) : (
+                    <Text style={styles.caca}>Loading...</Text>
+                )}
+            </View>
         </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create(
-{
+const styles = StyleSheet.create({
     caca: {
-        flex: 1,
         padding: 50
     }
-}
-)
+});
