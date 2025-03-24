@@ -1,49 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, StyleSheet, Pressable } from "react-native";
 import Header from "./header";
 import { Link } from "expo-router";
+import getUserSession from "./getUserSession";
+import Api from "./api";
+
+interface User {
+  id: number
+  name: string
+  firstName: string
+  email: string
+  brithDate: string
+  phone: string
+  roles: number
+  address: string
+}
 
 export default function Profil() {
+  const [user, setUser] = useState<User[]>([]);
+  const session = getUserSession()
+  var userId: number
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setUser(await Api("user", "get", userId));
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    session.then(user => {
+      if (user) {
+        const userData = JSON.parse(user)
+        userId = userData.user_id
+        fetchUser();
+      }
+    })
+  }, []);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user])
+
   return (
     <SafeAreaView style={styles.content}>
       <Header />
-          <Text style={styles.titleText}>Profil de Micheeeeeeel</Text>
 
-      <View style={styles.profilContainer}>
-        <Text style={styles.profilTitle}>Micheeeeeeeel Barnier</Text>
+      {user.length > 0 ? (
+        user.map((currentUser) => (
+          <View key={currentUser.id}>
+            <Text style={styles.titleText}>Profil de {currentUser.firstName}</Text>
 
-        <View style={styles.infoContainer}>
-          <View style={styles.infos}>
-            <Text style={styles.profilLabel}>Email : </Text>
-            <Text style={styles.profilContent}>michel@michel.fr</Text>
+            <View style={styles.profilContainer}>
+              <Text style={styles.profilTitle}>{currentUser.firstName} {currentUser.name}</Text>
+
+              <View style={styles.infoContainer}>
+                <View style={styles.infos}>
+                  <Text style={styles.profilLabel}>Email : </Text>
+                  <Text style={styles.profilContent}>{currentUser.email}</Text>
+                </View>
+                <View style={styles.infos}>
+                  <Text style={styles.profilLabel}>Date de Naissance : </Text>
+                  <Text style={styles.profilContent}>{currentUser.brithDate}</Text>
+                </View>
+                <View style={styles.infos}>
+                  <Text style={styles.profilLabel}>Adresse : </Text>
+                  <Text style={styles.profilContent}>{currentUser.address}</Text>
+                </View>
+                <View style={styles.infos}>
+                  <Text style={styles.profilLabel}>Numéro de Téléphone : </Text>
+                  <Text style={styles.profilContent}>{currentUser.phone}</Text>
+                </View>
+              </View>
+
+              {/* Container des boutons */}
+              <View style={styles.btnContainer}>
+                <Pressable style={styles.deleteButton}>
+                  <Link href={"/login"} style={styles.link}>
+                    Déconnexion
+                  </Link>
+                </Pressable>
+              </View>
+            </View>
           </View>
-          <View style={styles.infos}>
-          <Text style={styles.profilLabel}>Date de Naissance : </Text>
-            <Text style={styles.profilContent}>21/12/21</Text>
-            </View>
-            <View style={styles.infos}>
-          <Text style={styles.profilLabel}>Adresse : </Text>
-            <Text style={styles.profilContent}>1 rue du code</Text>
-            </View>
-            <View style={styles.infos}>
-          <Text style={styles.profilLabel}>Numéro de Téléphone : </Text>
-            <Text style={styles.profilContent}>0606060606</Text>
-            </View>
-            <View style={styles.infos}>
-          <Text style={styles.profilLabel}>Date de création : </Text>
-            <Text style={styles.profilContent}>21/12/21</Text>
-            </View>
-        </View>
-
-        {/* Container des boutons */}
-        <View style={styles.btnContainer}>
-          <Pressable style={styles.deleteButton}>
-            <Link href={"/login"} style={styles.link}>
-              Déconnexion
-            </Link>
-          </Pressable>
-        </View>
-      </View>
+        ))
+      ) : (
+        <Text>Loading...</Text>
+      )}
     </SafeAreaView>
   );
 }
@@ -95,11 +139,11 @@ const styles = StyleSheet.create({
     color: "#000000",
     marginVertical: 10,
   },
-    profilContent: {
-        fontSize: 16,
-        color: "#000000",
-        marginVertical: 10,
-    },
+  profilContent: {
+    fontSize: 16,
+    color: "#000000",
+    marginVertical: 10,
+  },
   btnContainer: {
     flexDirection: "row",
     justifyContent: "center",

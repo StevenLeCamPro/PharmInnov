@@ -2,8 +2,6 @@ import React from "react";
 import { StyleSheet, SafeAreaView, Image, Text, View } from "react-native";
 import Header from "./header";
 import Login from "./login";
-import Test from "./testApiGet";
-
 
 export default function Index() {
   return (
@@ -11,11 +9,8 @@ export default function Index() {
       <Header/>
       <View style={styles.content}>
 
-        {/* <Test></Test> */}
-
       <Login/>
       
-
       </View>
     </SafeAreaView>
   );

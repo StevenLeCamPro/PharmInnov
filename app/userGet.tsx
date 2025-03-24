@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -8,46 +8,78 @@ import {
   Text,
 } from "react-native";
 import Header from "./header";
+import Api from "./api";
+
+interface User {
+  id: number
+  name: string
+  firstName: string
+  email: string
+  brithDate: string
+  phone: string
+  roles: number
+  address: string
+}
 
 export default function UserList() {
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setUsers(await Api("user", "get"));
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    console.log(users);
+  }, [users])
+
   return (
     <SafeAreaView style={{ backgroundColor: "#E9DDBC", height: "100%" }}>
       <Header />
       <ScrollView style={{ marginBottom: 90 }}>
         <Text style={styles.titleText}>Liste des utilisateurs</Text>
-        <View style={styles.userContainer}>
-          <View style={styles.userImage}>
-            <Image
-              source={require("../assets/images/user.png")}
-              style={styles.image}
-            />
-          </View>
-          <View style={styles.textContainer}>
-            <View>
-              <Text style={styles.userName}>Micheeeeeeeeeeeel</Text>
-              <View style={styles.infos}>
-                <Text style={styles.profilLabel}>Email : </Text>
-                <Text style={styles.profilContent}>michel@michel.fr</Text>
+        {users.length > 0 ? (
+          users.map((user, index) => (
+            <View style={styles.userContainer} key={index}>
+              <View style={styles.userImage}>
+                <Image
+                  source={require("../assets/images/user.png")}
+                  style={styles.image}
+                />
               </View>
-              <View style={styles.infos}>
-                <Text style={styles.profilLabel}>Date de Naissance : </Text>
-                <Text style={styles.profilContent}>21/12/21</Text>
-              </View>
-              <View style={styles.infos}>
-                <Text style={styles.profilLabel}>Adresse : </Text>
-                <Text style={styles.profilContent}>1 rue du code</Text>
-              </View>
-              <View style={styles.infos}>
-                <Text style={styles.profilLabel}>Numéro de Téléphone : </Text>
-                <Text style={styles.profilContent}>0606060606</Text>
-              </View>
-              <View style={styles.infos}>
-                <Text style={styles.profilLabel}>Date de création : </Text>
-                <Text style={styles.profilContent}>21/12/21</Text>
+              <View style={styles.textContainer}>
+                <View>
+                  <Text style={styles.userName}>{user.firstName} {user.name}</Text>
+                  <View style={styles.infos}>
+                    <Text style={styles.profilLabel}>Email : </Text>
+                    <Text style={styles.profilContent}>{user.email}</Text>
+                  </View>
+                  <View style={styles.infos}>
+                    <Text style={styles.profilLabel}>Date de Naissance : </Text>
+                    <Text style={styles.profilContent}>{user.brithDate}</Text>
+                  </View>
+                  <View style={styles.infos}>
+                    <Text style={styles.profilLabel}>Adresse : </Text>
+                    <Text style={styles.profilContent}>{user.address}</Text>
+                  </View>
+                  <View style={styles.infos}>
+                    <Text style={styles.profilLabel}>Numéro de Téléphone : </Text>
+                    <Text style={styles.profilContent}>{user.phone}</Text>
+                  </View>
+                </View>
               </View>
             </View>
-          </View>
-        </View>
+          ))
+        ) : (
+          <Text>Loading...</Text>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

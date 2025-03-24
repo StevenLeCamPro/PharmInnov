@@ -63,40 +63,6 @@ export default function Login() {
           Bonjour et bienvenue ! Veuillez vous connecter.
         </Text>
 
-<<<<<<< HEAD
-<View style={styles.inputContainer}>
-    <Text style={styles.formText}>
-        Rentrez vos informations ci-dessous pour vous connecter
-    </Text>
-    
-    <TextInput
-        style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
-        autoCapitalize="none"
-    />
-    <TextInput
-        style={styles.input}
-        placeholder="Mot de passe"
-        secureTextEntry
-    />
-    <Pressable style={styles.button}>
-        <Link href={"/home"} style={styles.link}>Se connecter</Link>
-    </Pressable>
-    <Pressable style={styles.button}>
-      {/* Temporaire */}
-        <Link href={"/uploadOrdonnance"} style={styles.link}>Voir la page ordonnance</Link> 
-        
-    </Pressable>
-
-    <Text style={styles.formText2}>
-    Si vous n'avez pas de compte, veuillez consulter notre site pour vous inscrire
-    </Text>
-    
-</View>
-
-
-=======
         <View style={styles.inputContainer}>
           <Text style={styles.formText}>
             Rentrez vos informations ci-dessous pour vous connecter
@@ -130,7 +96,6 @@ export default function Login() {
             Si vous n'avez pas de compte, veuillez consulter notre site pour vous inscrire
           </Text>
         </View>
->>>>>>> 512c5aebc8004463ad50c43b904fd9dfe0dd1d3e
       </View>
     </SafeAreaView>
   );
