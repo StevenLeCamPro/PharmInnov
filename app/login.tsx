@@ -1,10 +1,8 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, SafeAreaView, Image, Text, View, Pressable } from "react-native";
 import { TextInput, Button } from "react-native";
 import * as SecureStore from 'expo-secure-store';
-
-
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,10 +11,10 @@ export default function Login() {
   // const navigate = useNavigate();
   // const { message, addFlashMessage } = useFlashMessage();
 
+  const router = useRouter();
+
   const handleLogin = async () => {
     const loginData = JSON.stringify({ email, password });
-    
-    console.log('tu me tentes le login maintenant la con de ta race')
 
     try {
       const response = await fetch('http://10.0.2.2:8000/login', {
@@ -30,6 +28,8 @@ export default function Login() {
       console.log(data)
 
       await SecureStore.setItemAsync('userSession', JSON.stringify(data));
+
+
 
       // if (response.ok) {
       //     Cookies.set('pharminnov_login', JSON.stringify({
@@ -49,6 +49,8 @@ export default function Login() {
       // } else {
       //     setErrorMessage(data.error || "Connexion échouée. Veuillez réessayer.");
       // }
+
+      router.push('/home')
     } catch (error) {
       // setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
       console.error('An error occurred:', error);
@@ -86,11 +88,10 @@ export default function Login() {
           <Pressable style={styles.button} onPress={() => handleLogin()}>
             <Link href={"/"} style={styles.link} onPress={() => handleLogin()}>Se connecter</Link>
           </Pressable>
-          <Pressable style={styles.button}>
-            {/* Temporaire */}
+          {/* <Pressable style={styles.button}>
             <Link href={"/uploadOrdonnance"} style={styles.link}>Voir la page ordonnance</Link>
 
-          </Pressable>
+          </Pressable> */}
 
           <Text style={styles.formText2}>
             Si vous n'avez pas de compte, veuillez consulter notre site pour vous inscrire

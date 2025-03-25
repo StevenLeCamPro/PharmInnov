@@ -11,11 +11,14 @@ import {
     TouchableOpacity,
 } from "react-native";
 import Header from "./header";
-
+import { Linking } from 'react-native';
 
 export default function VirtualApplication() {
-    const handleUpload = () => {
-        // Logic to handle file upload
+
+    const installAPK = () => {
+        const apkUrl = 'http://10.0.2.2:8000/Pharminnov/Pharminnov.apk';
+        Linking.openURL(apkUrl)
+          .catch(err => console.error("Failed to open URL:", err));
     };
 
     return (
@@ -26,7 +29,7 @@ export default function VirtualApplication() {
             <Text style={styles.titleText}>Venez découvrir une pharmacie en visite virtuelle</Text>
             <View style={styles.card}>
                 <Text style={styles.cardTitle}>Téléchargez l'appliation juste en dessous</Text>
-                <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
+                <TouchableOpacity style={styles.uploadButton} onPress={installAPK}>
                     <Text style={styles.uploadButtonText}>Voir la visite virtuelle</Text>
                 </TouchableOpacity>
                 
